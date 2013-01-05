@@ -1,11 +1,12 @@
-import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 
 
-public class Decimal 
+public final class Decimal
 {
+    private Decimal() {}
+    
 	public static String toBinary(String input)
 	{
 		boolean negative = false;
@@ -25,7 +26,7 @@ public class Decimal
 		// BigDecimal and BigInteger used to convert any size Decimal input into binary
 		bdnum = new BigDecimal(input).abs();
 		binum = new BigInteger(input).abs();
-		bi0 = new BigInteger("0");
+		bi0 = BigInteger.ZERO;
 		bi2 = new BigInteger("2");
 		bd1 = new BigDecimal("1");
 		bd2 = new BigDecimal("2");
@@ -228,12 +229,7 @@ public class Decimal
 	// checks if a character qualifies to be part of a decimal number
 	public static boolean isDecimal(char c) 
 	{
-		if((c >= '0') && (c <= '9') && (c != KeyEvent.VK_BACK_SPACE))
-			return true;
-		else if( c == '-')
-			return true;
-		else
-			return false;		
+		return (c >= '0' && c <= '9') || c == '-';
 	}
 	
 	public static boolean isNumeric(String str)
@@ -251,18 +247,6 @@ public class Decimal
 			return false;
 		}
 	}
-	
-	// checks if the string is empty
-	public static boolean hasSign(String input) 
-	{
-		if(input.isEmpty())
-			return false;
-		else if(input.contains("-"))
-			return true;
-		 
-		return true;
-	}
-
 
 	public static boolean notZero(String input)
 	{
@@ -270,17 +254,10 @@ public class Decimal
 		BigInteger zero = new BigInteger("0");
 		BigInteger num;
 		
-		if(input.charAt(0) == '-')
-			for(int i = 1; i < input.length(); i++)
-				temp += Character.toString(input.charAt(i));
-		else
-			for(int i = 0; i < input.length(); i++)
-				temp += Character.toString(input.charAt(i));
+        for(int i = input.charAt(0) == '-'?1:0; i < input.length(); i++)
+            temp += Character.toString(input.charAt(i));
 			
 		num = new BigInteger(temp);
-		if(num.compareTo(zero) == 0)
-			return false;
-		else return true;
-		
+		return num.compareTo(zero) != 0;		
 	}
 }

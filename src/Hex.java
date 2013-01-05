@@ -1,8 +1,9 @@
 import java.math.BigInteger;
 
 
-public class Hex 
+public final class Hex
 {
+    private Hex() {}
 	
 	public static String toDecimal(String input)
 	{

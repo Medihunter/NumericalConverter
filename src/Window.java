@@ -1,4 +1,3 @@
-
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -73,7 +72,7 @@ public class Window
 				char c = e.getKeyChar(); 
 				String extra = "";
 				
-				if (!Decimal.isDecimal(c))
+				if (!Decimal.isDecimal(c) && c != KeyEvent.VK_BACK_SPACE)
 					e.consume();  // ignore event if inputs are not 0-9 or '-' 
 			    
 				if(!textField_Decimal.getText().isEmpty() && c == '-')
@@ -124,11 +123,11 @@ public class Window
 				String extra = "";
 				
 				if (!Binary.isBinary(c))
-					e.consume();  // ignore event	
+					e.consume();  // ignore event
 			    if(Character.isDigit(c))
-			    	extra = Character.toString(c);	
+			    	extra = Character.toString(c);
 		    	
-				if(!textField_Binary.getText().isEmpty() || Binary.isBinary(c))
+				if(!textField_Binary.getText().isEmpty() || Binary.isBinary(c) || c == KeyEvent.VK_BACK_SPACE)
 				{
 					String input = Binary.vertifyBinary(textField_Binary.getText()+extra);
 					textField_Decimal.setText(Binary.toDecimal(input));
@@ -170,7 +169,7 @@ public class Window
 				if (Hex.isHex(c))
 					extra = Character.toString(c);	
 				
-				if(!textField_Hex.getText().isEmpty() || Hex.isHex(c))
+				if(!textField_Hex.getText().isEmpty() || (Hex.isHex(c) || c == KeyEvent.VK_BACK_SPACE))
 				{
 					if(textField_Hex.getText().isEmpty())
 					{
