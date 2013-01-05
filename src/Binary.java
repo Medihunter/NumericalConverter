@@ -1,9 +1,8 @@
-import java.awt.event.KeyEvent;
 import java.math.BigInteger;
 
-
-public class Binary
+public final class Binary
 {
+    private Binary() {}
 	
 	public static String toDecimal(String input)
 	{
@@ -176,9 +175,6 @@ public class Binary
 	
 	protected static boolean isBinary(char c) 
 	{
-		if((c == '0') || (c == '1') && (c != KeyEvent.VK_BACK_SPACE))
-			return true;
-		else
-			return false;	
+		return c == '0' || c == '1';
 	}
 }
